@@ -4,17 +4,20 @@
   "description": "Utility functions used within the af-XXXX Frameworks and Libraries",
   "main": "build/lib/index.js",
   "scripts": {
+    "build": "npm run clean:all && npm test && npm run compile",
     "clean:build": "npx rimraf build",
     "clean-dist": "npm run clean:build",
     "clean:reports": "npx rimraf reports && npx rimraf .nyc_output",
     "clean-reports": "npm run clean:reports",
     "clean:all": "npm run clean:build && npm run clean:reports",
     "clean-all": "npm run clean:all",
-    "compile": " npx tsc",
-    "build": "npm run clean:all && npm test && npm run compile",
+    "compile": "npx tsc",
+    "coverage": "npx nyc report --reporter=text-lcov | coveralls",
     "dist": "npm run build",
-    "test": "npx nyc mocha --config ./test/.mocharc.json --reporter-options reportDir='./reports/testing'",
-    "coverage": "npx nyc report --reporter=text-lcov | coveralls"
+    "fix": "npx eslint --fix '**/*.ts'",
+    "format": "npx prettier --write .",
+    "lint": "npx eslint '**/*.ts'",
+    "test": "npx nyc mocha --config ./test/.mocharc.json --reporter-options reportDir='./reports/testing'"
   },
   "files": [
     "build"
